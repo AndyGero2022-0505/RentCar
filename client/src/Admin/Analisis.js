@@ -1,5 +1,6 @@
 // src/Admin/Analisis.js
 import React from "react";
+import { Link } from "react-router-dom";
 import "../Css/AdminStyles.css";
 
 const Analisis = () => {
@@ -9,7 +10,7 @@ const Analisis = () => {
       modelo: "Toyota Corolla",
       fecha: "7/11/2024 - 11/11/2024",
       alquiladoA: "Juan P. Arias",
-      img: "ruta/toyota-corolla.jpg", // Reemplazar con la URL de la imagen
+      img: "ruta/toyota-corolla.jpg",
     },
   ];
 
@@ -17,16 +18,15 @@ const Analisis = () => {
     <div className="admin-page">
       <h1>ADMINISTRACIÓN</h1>
       <div className="menu">
-        <button className="menu-btn">LISTA DE VEHÍCULOS</button>
-        <button className="menu-btn active">ANÁLISIS</button>
-        <button className="menu-btn">USUARIOS</button>
-        <button className="menu-btn">ECONOMÍA</button>
+        <Link to="/admin/lista-vehiculos" className="menu-btn">LISTA DE VEHÍCULOS</Link>
+        <Link to="/admin/analisis" className="menu-btn">ANÁLISIS</Link>
+        <Link to="/admin/economia" className="menu-btn">ECONOMÍA</Link>
+        <Link to="/admin/usuarios" className="menu-btn">USUARIOS</Link>
       </div>
       <div className="content">
         <h2>ANÁLISIS</h2>
         <div className="analisis-box">
-          Aquí van a mostrar cuántos vehículos tenemos alquilados (por
-          clasificación, ej: todos en general, Toyotas, Kia, etc.).
+          Aquí van a mostrar cuántos vehículos tenemos alquilados (por clasificación, ej: todos en general, Toyotas, Kia, etc.).
         </div>
         <div className="analisis-table">
           <table>
