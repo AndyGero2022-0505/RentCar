@@ -1,22 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { useState } from 'react';
+import './AdminUsers.css';
 
 const AdminUsers = () => {
-  const [users, setUsers] = useState([]);
+  const [users, setUsers] = useState([
+    { _id: '1', name: 'Juan Pérez', email: 'juan@ejemplo.com', role: 'admin' },
+    { _id: '2', name: 'María López', email: 'maria@ejemplo.com', role: 'user' },
+  ]);
+
   const [newUser, setNewUser] = useState({ name: '', email: '', role: '' });
-  
-  // Cargar los usuarios desde el backend
-  useEffect(() => {
-    const fetchUsers = async () => {
-      try {
-        const response = await axios.get('/api/users');
-        setUsers(response.data);
-      } catch (error) {
-        console.error('Error al obtener los usuarios:', error);
-      }
-    };
-    fetchUsers();
-  }, []);
 
   // Manejar cambios en el formulario de creación de usuario
   const handleChange = (e) => {
@@ -28,25 +19,17 @@ const AdminUsers = () => {
   };
 
   // Crear un nuevo usuario
-  const handleAddUser = async (e) => {
+  const handleAddUser = (e) => {
     e.preventDefault();
-    try {
-      const response = await axios.post('/api/users', newUser);
-      setUsers([...users, response.data]);
-      setNewUser({ name: '', email: '', role: '' });
-    } catch (error) {
-      console.error('Error al agregar el usuario:', error);
-    }
+    const userId = (users.length + 1).toString(); // Generar un ID simple
+    const newUserData = { ...newUser, _id: userId };
+    setUsers([...users, newUserData]);
+    setNewUser({ name: '', email: '', role: '' });
   };
 
   // Eliminar un usuario
-  const handleDeleteUser = async (userId) => {
-    try {
-      await axios.delete(`/api/users/${userId}`); // Corrección: Uso de backticks
-      setUsers(users.filter((user) => user._id !== userId));
-    } catch (error) {
-      console.error('Error al eliminar el usuario:', error);
-    }
+  const handleDeleteUser = (userId) => {
+    setUsers(users.filter((user) => user._id !== userId));
   };
 
   return (
@@ -100,4 +83,3 @@ const AdminUsers = () => {
 };
 
 export default AdminUsers;
-
