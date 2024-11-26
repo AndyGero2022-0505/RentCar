@@ -18,10 +18,10 @@ const Analisis = () => {
     <div className="admin-page">
       <h1>ADMINISTRACIÓN</h1>
       <div className="menu">
-      <Link to="/admin/lista-vehiculos" className="menu-btn active">LISTA DE VEHÍCULOS</Link>
+        <Link to="/admin/lista-vehiculos" className="menu-btn">LISTA DE VEHÍCULOS</Link>
         <Link to="/admin/analisis" className="menu-btn">ANÁLISIS</Link>
-        <button className="menu-btn">USUARIOS</button>
-        <button className="menu-btn">ECONOMÍA</button>
+        <Link to="/admin/economia" className="menu-btn">ECONOMÍA</Link>
+        <Link to="/admin/usuarios" className="menu-btn">USUARIOS</Link>
       </div>
       <div className="content">
         <h2>ANÁLISIS</h2>

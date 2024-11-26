@@ -2,6 +2,8 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import App from "../App/App";
 import Analisis from "../Admin/Analisis";
 import ListaVehiculos from "../Admin/ListaVehiculos";
+import AdminEconomy from "../Admin/AdminEconomy";
+import AdminUsers from "../Admin/AdminUsers";
 
 export function Ruta() {
   return (
@@ -10,6 +12,8 @@ export function Ruta() {
         <Route path="/" element={<App />} />
         <Route path="/admin/analisis" element={<Analisis />} />
         <Route path="/admin/lista-vehiculos" element={<ListaVehiculos />} />
+        <Route path="/admin/economia" element={<AdminEconomy />} />
+        <Route path="/admin/usuarios" element={<AdminUsers />} />
       </Routes>
     </BrowserRouter>
   );

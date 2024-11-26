@@ -1,106 +1,217 @@
-/* Estilo general */
-body {
-  font-family: Arial, sans-serif;
-  background-color: #f5f5f5;
-  color: #333;
-  margin: 0;
-  padding: 0;
-}
-
-div {
-  max-width: 800px;
-  margin: 20px auto;
+/* Diseño general para la página de administrador */
+.admin-page {
   padding: 20px;
-  background: #fff;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-/* Títulos */
-h1, h3 {
-  color: #444;
-  margin-bottom: 15px;
+  background-color: #f8f9fa; /* Fondo gris claro */
+  font-family: Arial, sans-serif;
+  min-height: 100vh;
 }
 
 h1 {
+  font-size: 2.5rem;
   text-align: center;
+  margin-bottom: 20px;
+  color: #091c44; /* Azul oscuro */
+  text-transform: uppercase;
+}
+
+/* Menú de navegación */
+.menu {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 30px;
+}
+
+.menu-btn {
+  text-decoration: none;
+  font-size: 1rem;
+  color: #fff;
+  background-color: #091c44; /* Azul oscuro */
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-weight: bold;
+  text-transform: uppercase;
+  transition: background-color 0.3s ease;
+}
+
+.menu-btn:hover {
+  background-color: #0056b3; /* Azul más claro */
+}
+
+/* Estilos específicos para datos generales */
+.data-box {
+  background-color: #091c44; /* Azul oscuro */
+  color: white;
+  padding: 20px;
+  margin: 20px auto;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  max-width: 600px;
+}
+
+.data-box h2 {
+  font-size: 1.8rem;
+  margin-bottom: 15px;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+/* Tablas de datos */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #091c44; /* Azul oscuro */
+  margin: 20px auto;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.table th {
+  background-color: #004080; /* Azul más oscuro */
+  color: white;
+  text-transform: uppercase;
+  padding: 15px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.table td {
+  padding: 15px;
+  text-align: center;
+  color: white;
+  border-bottom: 1px solid #004080;
+}
+
+.table tr:nth-child(even) {
+  background-color: #092d56; /* Azul intermedio */
+}
+
+.action-btn {
+  padding: 8px 15px;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* Estilo general de los botones */
+.delete-btn, .edit-btn2 {
+  background-color: #fff; /* Color de fondo */
+  color: #091c44; /* Color del texto */
+  font-weight: bold;
+  padding: 10px 20px; /* Tamaño del botón */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: background-color 0.3s ease;
+  display: inline-block; /* Alinea los botones horizontalmente */
+  margin: 0 10px; /* Espacio entre los botones */
+  text-align: center; /* Centra el texto dentro del botón */
+}
+
+.cancel-btn {
+  background-color: #ff9800;
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  text-transform: uppercase;
+  width: 100%;
+}
+
+.delete-btn:hover {
+  background-color: #a71d2a; /* Rojo oscuro */
+}
+
+.edit-btn2:hover {
+  background-color: #e9db5d; /* Rojo oscuro */
+}
+
+.cancel-btn:hover {
+  background-color: #ff5722; /* Rojo más oscuro */
 }
 
 /* Formulario */
-form {
-  margin-bottom: 20px;
+.formulario {
+  background-color: #fff; /* Fondo blanco */
+  padding: 20px;
+  border-radius: 10px;
+  margin: 20px auto;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 500px;
 }
 
-form input,
-form select {
-  width: calc(33% - 10px);
-  margin: 5px;
+.formulario h3 {
+  font-size: 1.5rem;
+  color: #091c44;
+  margin-bottom: 15px;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.formulario input,
+.formulario select,
+.formulario button {
+  width: 100%;
   padding: 10px;
+  margin-bottom: 10px;
+  font-size: 1rem;
   border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 14px;
+  border-radius: 5px;
+  box-sizing: border-box;
 }
 
-form select {
-  cursor: pointer;
-}
-
-form input:focus,
-form select:focus {
-  border-color: #007BFF;
+.formulario input:focus,
+.formulario select:focus {
+  border-color: #0056b3; /* Azul claro */
   outline: none;
-  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
 }
 
-/* Botón */
-button {
-  padding: 10px 15px;
-  background-color: #007BFF;
+.formulario button {
+  background-color: #091c44;
   color: white;
-  font-size: 14px;
-  border: none;
-  border-radius: 4px;
+  font-weight: bold;
+  text-transform: uppercase;
   cursor: pointer;
-  margin: 5px;
+  transition: background-color 0.3s ease;
 }
 
-button:hover {
-  background-color: #0056b3;
+.formulario button:hover {
+  background-color: #0056b3; /* Azul más claro */
 }
 
-button:disabled {
-  background-color: #ccc;
-  cursor: not-allowed;
-}
-
-/* Lista de usuarios */
-ul {
-  list-style: none;
-  padding: 0;
-}
-
-li {
+/* Diseño para las métricas generales (Economía) */
+.metrics {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  margin-bottom: 10px;
-  background-color: #f9f9f9;
+  gap: 10px;
+  margin: 20px auto;
+  max-width: 800px;
 }
 
-li button {
-  background-color: #dc3545;
+.metric-card {
+  flex: 1;
+  background-color: #091c44;
+  color: white;
+  padding: 15px;
+  text-align: center;
+  border-radius: 8px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-li button:hover {
-  background-color: #a71d2a;
-}
-
-/* Resaltar roles */
-li span.role {
+.metric-card h4 {
+  font-size: 1.2rem;
+  text-transform: uppercase;
   font-weight: bold;
-  color: #555;
+}
+
+.metric-card p {
+  font-size: 1.5rem;
+  margin: 10px 0;
+  font-weight: bold;
 }

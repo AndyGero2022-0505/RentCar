@@ -1,83 +1,125 @@
-import React, { useState } from 'react';
-import './AdminUsers.css';
+import React, { useState } from "react";
+import "../Css/AdminUsers.css";
+import { Link } from "react-router-dom";
 
 const AdminUsers = () => {
   const [users, setUsers] = useState([
-    { _id: '1', name: 'Juan Pérez', email: 'juan@ejemplo.com', role: 'admin' },
-    { _id: '2', name: 'María López', email: 'maria@ejemplo.com', role: 'user' },
+    { id: 1, name: "Juan Pérez", email: "juan@gmail.com", role: "Admin" },
+    { id: 2, name: "María López", email: "maria@gmail.com", role: "User" },
   ]);
+  const [newUser, setNewUser] = useState({ name: "", email: "", role: "" });
+  const [editingUser, setEditingUser] = useState(null); // Para almacenar el usuario a editar
 
-  const [newUser, setNewUser] = useState({ name: '', email: '', role: '' });
-
-  // Manejar cambios en el formulario de creación de usuario
-  const handleChange = (e) => {
+  const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setNewUser({
-      ...newUser,
-      [name]: value,
-    });
+    setNewUser({ ...newUser, [name]: value });
   };
 
-  // Crear un nuevo usuario
   const handleAddUser = (e) => {
     e.preventDefault();
-    const userId = (users.length + 1).toString(); // Generar un ID simple
-    const newUserData = { ...newUser, _id: userId };
-    setUsers([...users, newUserData]);
-    setNewUser({ name: '', email: '', role: '' });
+    if (newUser.name && newUser.email && newUser.role) {
+      setUsers([...users, { ...newUser, id: users.length + 1 }]);
+      setNewUser({ name: "", email: "", role: "" });
+      alert("Usuario agregado con éxito.");
+    } else {
+      alert("Por favor, completa todos los campos.");
+    }
   };
 
-  // Eliminar un usuario
-  const handleDeleteUser = (userId) => {
-    setUsers(users.filter((user) => user._id !== userId));
+  const handleEditUser = (id) => {
+    const userToEdit = users.find((user) => user.id === id);
+    setEditingUser(userToEdit);
+    setNewUser({ name: userToEdit.name, email: userToEdit.email, role: userToEdit.role });
+  };
+
+  const handleUpdateUser = (e) => {
+    e.preventDefault();
+    if (newUser.name && newUser.email && newUser.role) {
+      const updatedUsers = users.map((user) =>
+        user.id === editingUser.id ? { ...user, ...newUser } : user
+      );
+      setUsers(updatedUsers);
+      setEditingUser(null);
+      setNewUser({ name: "", email: "", role: "" });
+      alert("Usuario actualizado con éxito.");
+    } else {
+      alert("Por favor, completa todos los campos.");
+    }
+  };
+
+  const handleDeleteUser = (id) => {
+    const confirmDelete = window.confirm("¿Estás seguro de que deseas eliminar este usuario?");
+    if (confirmDelete) {
+      setUsers(users.filter((user) => user.id !== id));
+    }
   };
 
   return (
-    <div>
-      <h1>Administrar Usuarios</h1>
+    <div className="admin-page">
+      <h1>ADMINISTRACIÓN</h1>
+      <div className="menu">
+        <Link to="/admin/lista-vehiculos" className="menu-btn">Lista de Vehículos</Link>
+        <Link to="/admin/analisis" className="menu-btn">Análisis</Link>
+        <Link to="/admin/economia" className="menu-btn">Economía</Link>
+        <Link to="/admin/usuarios" className="menu-btn">Usuarios</Link>
+      </div>
 
-      {/* Formulario para agregar un nuevo usuario */}
-      <form onSubmit={handleAddUser}>
-        <h3>Agregar Nuevo Usuario</h3>
+      {/* Formulario para agregar o editar usuario */}
+      <form className="formulario" onSubmit={editingUser ? handleUpdateUser : handleAddUser}>
+        <h3>{editingUser ? "Editar Usuario" : "Agregar Usuario"}</h3>
         <input
           type="text"
           name="name"
-          value={newUser.name}
-          onChange={handleChange}
           placeholder="Nombre"
+          value={newUser.name}
+          onChange={handleInputChange}
           required
         />
         <input
           type="email"
           name="email"
+          placeholder="Email"
           value={newUser.email}
-          onChange={handleChange}
-          placeholder="Correo electrónico"
+          onChange={handleInputChange}
           required
         />
-        <select
-          name="role"
-          value={newUser.role}
-          onChange={handleChange}
-          required
-        >
+        <select name="role" value={newUser.role} onChange={handleInputChange} required>
           <option value="">Seleccionar Rol</option>
-          <option value="admin">Administrador</option>
-          <option value="user">Usuario</option>
+          <option value="Admin">Admin</option>
+          <option value="User">Usuario</option>
         </select>
-        <button type="submit">Agregar Usuario</button>
+        <button type="submit">{editingUser ? "Actualizar Usuario" : "Agregar Usuario"}</button>
+        {editingUser && <button type="button" onClick={() => setEditingUser(null)}>Cancelar</button>}
       </form>
 
-      {/* Mostrar la lista de usuarios */}
-      <h3>Lista de Usuarios</h3>
-      <ul>
-        {users.map((user) => (
-          <li key={user._id}>
-            {user.name} - {user.email} - {user.role}
-            <button onClick={() => handleDeleteUser(user._id)}>Eliminar</button>
-          </li>
-        ))}
-      </ul>
+      {/* Tabla de usuarios */}
+      <table className="table">
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Email</th>
+            <th>Rol</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          {users.map((user) => (
+            <tr key={user.id}>
+              <td>{user.name}</td>
+              <td>{user.email}</td>
+              <td>{user.role}</td>
+              <td>
+                <button className="action-btn edit-btn2" onClick={() => handleEditUser(user.id)}>
+                  Editar
+                </button>
+                <button className="action-btn delete-btn" onClick={() => handleDeleteUser(user.id)}>
+                  Eliminar
+                </button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 };

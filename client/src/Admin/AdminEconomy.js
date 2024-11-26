@@ -1,90 +1,77 @@
-import React, { useState, useEffect } from 'react';
-import './AdminEconomy.css';
+import React, { useState, useEffect } from "react";
+import "../Css/AdminUsers.css";
+import { Link } from "react-router-dom";
 
 const AdminEconomy = () => {
   const [economyData, setEconomyData] = useState({
-    totalGains: 0,
-    totalInvestments: 0,
-    netProfit: 0,
+    totalGains: 5000,
+    totalInvestments: 2000,
+    netProfit: 3000,
   });
 
-  const [newEconomyData, setNewEconomyData] = useState({
-    totalGains: '',
-    totalInvestments: '',
-  });
+  const [newData, setNewData] = useState({ totalGains: "", totalInvestments: "" });
 
-  // Cargar los datos económicos estáticos
   useEffect(() => {
-    // Simulando la carga de datos económicos sin backend
-    setEconomyData({
-      totalGains: 5000,
-      totalInvestments: 2000,
-      netProfit: 3000, // Ganancia neta calculada directamente
-    });
-  }, []);
-
-  // Calcular la ganancia neta
-  useEffect(() => {
-    setEconomyData((prevData) => ({
-      ...prevData,
-      netProfit: prevData.totalGains - prevData.totalInvestments,
+    const { totalGains, totalInvestments } = economyData;
+    setEconomyData((prev) => ({
+      ...prev,
+      netProfit: totalGains - totalInvestments,
     }));
   }, [economyData.totalGains, economyData.totalInvestments]);
 
-  // Manejar cambios en los inputs
-  const handleChange = (e) => {
+  const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setNewEconomyData({
-      ...newEconomyData,
-      [name]: value,
-    });
+    setNewData({ ...newData, [name]: value });
   };
 
-  // Actualizar los datos económicos sin backend
-  const handleUpdateEconomy = (e) => {
+  const handleUpdate = (e) => {
     e.preventDefault();
+    const { totalGains, totalInvestments } = newData;
     setEconomyData({
-      totalGains: parseFloat(newEconomyData.totalGains),
-      totalInvestments: parseFloat(newEconomyData.totalInvestments),
-      netProfit: parseFloat(newEconomyData.totalGains) - parseFloat(newEconomyData.totalInvestments),
+      totalGains: parseFloat(totalGains),
+      totalInvestments: parseFloat(totalInvestments),
+      netProfit: parseFloat(totalGains) - parseFloat(totalInvestments),
     });
-    setNewEconomyData({ totalGains: '', totalInvestments: '' });
+    setNewData({ totalGains: "", totalInvestments: "" });
   };
 
   return (
-    <div>
-      <h1>Sección de Economía</h1>
-
-      <div>
-        <h3>Datos Económicos Actuales</h3>
-        <p><strong>Ganancias Totales al Mes:</strong> ${economyData.totalGains}</p>
-        <p><strong>Total de Inversiones:</strong> ${economyData.totalInvestments}</p>
-        <p><strong>Ganancia Neta:</strong> ${economyData.netProfit}</p>
+    <div className="admin-page">
+      <h1>ADMINISTRACIÓN</h1>
+      <div className="menu">
+        <Link to="/admin/lista-vehiculos" className="menu-btn">Lista de Vehículos</Link>
+        <Link to="/admin/analisis" className="menu-btn">Análisis</Link>
+        <Link to="/admin/economia" className="menu-btn">Economía</Link>
+        <Link to="/admin/usuarios" className="menu-btn">Usuarios</Link>
       </div>
-
-      <form onSubmit={handleUpdateEconomy}>
-        <h3>Actualizar Datos Económicos</h3>
+      <div className="data-box">
+        <h2>Estado Actual</h2>
+        <p>Ganancias Totales: ${economyData.totalGains}</p>
+        <p>Inversiones Totales: ${economyData.totalInvestments}</p>
+        <p>Ganancia Neta: ${economyData.netProfit}</p>
+      </div>
+      <form className="formulario" onSubmit={handleUpdate}>
+        <h3>Actualizar Datos</h3>
         <input
           type="number"
           name="totalGains"
-          value={newEconomyData.totalGains}
-          onChange={handleChange}
-          placeholder="Ingresar ganancias"
+          placeholder="Nuevas Ganancias"
+          value={newData.totalGains}
+          onChange={handleInputChange}
           required
         />
         <input
           type="number"
           name="totalInvestments"
-          value={newEconomyData.totalInvestments}
-          onChange={handleChange}
-          placeholder="Ingresar inversiones"
+          placeholder="Nuevas Inversiones"
+          value={newData.totalInvestments}
+          onChange={handleInputChange}
           required
         />
-        <button type="submit">Actualizar Datos</button>
+        <button type="submit">Actualizar</button>
       </form>
     </div>
   );
 };
 
 export default AdminEconomy;
-
