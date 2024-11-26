@@ -1,5 +1,5 @@
-// src/Admin/ListaVehiculos.js
 import React from "react";
+import { Link } from "react-router-dom";
 import "../Css/AdminStyles.css";
 
 const ListaVehiculos = () => {
@@ -7,7 +7,7 @@ const ListaVehiculos = () => {
     {
       id: 1,
       modelo: "Toyota Corolla",
-      img: "ruta/toyota-corolla.jpg", // Reemplazar con la URL de la imagen
+      img: "../Images/ToyotaCorolla.png",
     },
   ];
 
@@ -15,8 +15,8 @@ const ListaVehiculos = () => {
     <div className="admin-page">
       <h1>ADMINISTRACIÓN</h1>
       <div className="menu">
-        <button className="menu-btn active">LISTA DE VEHÍCULOS</button>
-        <button className="menu-btn">ANÁLISIS</button>
+        <Link to="/admin/lista-vehiculos" className="menu-btn active">LISTA DE VEHÍCULOS</Link>
+        <Link to="/admin/analisis" className="menu-btn">ANÁLISIS</Link>
         <button className="menu-btn">USUARIOS</button>
         <button className="menu-btn">ECONOMÍA</button>
       </div>
@@ -26,8 +26,12 @@ const ListaVehiculos = () => {
         <div className="vehiculos-list">
           {vehiculos.map((vehiculo) => (
             <div key={vehiculo.id} className="vehiculo-card">
-              <img src={vehiculo.img} alt={vehiculo.modelo} />
-              <p>{vehiculo.modelo}</p>
+              <img src={vehiculo.img} alt={vehiculo.modelo} className="vehiculo-img" />
+              <p className="vehiculo-modelo">{vehiculo.modelo}</p>
+              <div className="vehiculo-actions">
+                <button className="edit-btn">✎</button>
+                <button className="delete-btn">🗑</button>
+              </div>
             </div>
           ))}
         </div>
@@ -37,3 +41,4 @@ const ListaVehiculos = () => {
 };
 
 export default ListaVehiculos;
+ 
