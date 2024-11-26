@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import './AdminEconomy.css';
 
 const AdminEconomy = () => {
   const [economyData, setEconomyData] = useState({
@@ -13,17 +13,14 @@ const AdminEconomy = () => {
     totalInvestments: '',
   });
 
-  // Cargar los datos económicos
+  // Cargar los datos económicos estáticos
   useEffect(() => {
-    const fetchEconomyData = async () => {
-      try {
-        const response = await axios.get('/api/economy');
-        setEconomyData(response.data);
-      } catch (error) {
-        console.error('Error al obtener los datos económicos:', error);
-      }
-    };
-    fetchEconomyData();
+    // Simulando la carga de datos económicos sin backend
+    setEconomyData({
+      totalGains: 5000,
+      totalInvestments: 2000,
+      netProfit: 3000, // Ganancia neta calculada directamente
+    });
   }, []);
 
   // Calcular la ganancia neta
@@ -43,16 +40,15 @@ const AdminEconomy = () => {
     });
   };
 
-  // Actualizar los datos económicos
-  const handleUpdateEconomy = async (e) => {
+  // Actualizar los datos económicos sin backend
+  const handleUpdateEconomy = (e) => {
     e.preventDefault();
-    try {
-      const response = await axios.put('/api/economy', newEconomyData);
-      setEconomyData(response.data);
-      setNewEconomyData({ totalGains: '', totalInvestments: '' });
-    } catch (error) {
-      console.error('Error al actualizar los datos económicos:', error);
-    }
+    setEconomyData({
+      totalGains: parseFloat(newEconomyData.totalGains),
+      totalInvestments: parseFloat(newEconomyData.totalInvestments),
+      netProfit: parseFloat(newEconomyData.totalGains) - parseFloat(newEconomyData.totalInvestments),
+    });
+    setNewEconomyData({ totalGains: '', totalInvestments: '' });
   };
 
   return (
@@ -90,4 +86,5 @@ const AdminEconomy = () => {
   );
 };
 
-export default AdminEconomy;
+export default AdminEconomy;
+
