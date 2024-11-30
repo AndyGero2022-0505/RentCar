@@ -1,45 +1,30 @@
-
-.Contenedor_Slide{
-    position: relative;
-    overflow-x: hidden;
+.Contenedor_Slide {
     position: relative;
     top: 130px;
+    z-index: 1; 
+    background: transparent; 
 }
 
+.Contenedor_Slide .Btn-Atras,
+.Contenedor_Slide .Btn-Delante {
+    height: 100%;
+    position: absolute;
+    display: flex;
+    align-items: center;
+}
 
 .Contenedor_Slide .Btn-Atras {
-    height: 100%;
-    position: absolute;
     left: 0;
-    display: flex;
-    align-items: center;
     margin-left: 25px;
+}
 
-}
-.Contenedor_Slide .Btn-Atras button{
-    cursor: pointer;
-    background: rgba(196, 186, 186, 0.2);
-    width: 50px;
-    height: 50px;
-    border-radius: 100vmax;
-    border: none;
-    color: #fff;
-    font-size: 40px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-}
-.Contenedor_Slide .Btn-Delante{
-    height: 100%;
-    position: absolute;
-    top: 0;
+.Contenedor_Slide .Btn-Delante {
     right: 0;
-    display: flex;
-    align-items: center;
     margin-right: 25px;
 }
-.Contenedor_Slide .Btn-Delante button{
+
+.Contenedor_Slide .Btn-Atras button,
+.Contenedor_Slide .Btn-Delante button {
     cursor: pointer;
     background: rgba(196, 186, 186, 0.2);
     width: 50px;
@@ -53,23 +38,25 @@
     align-items: center;
 }
 
-.Contenedor_Slide .Body-Slide{
+.Contenedor_Slide .Body-Slide {
     position: absolute;
     top: 0;
     color: #fff;
-    transform: translateX(100px);
+    transform: translateX(100px); 
     margin-top: 60px;
-   
     width: 35%;
+    transition: transform 0.3s ease-in-out;
+    z-index: 10; 
 }
 
-.Contenedor_Slide .Body-Slide .Titulo:nth-child(1){
+.Contenedor_Slide .Body-Slide .Titulo:nth-child(1) {
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     text-transform: uppercase;
     font-weight: bold;
     font-size: 40px;
 }
-.Contenedor_Slide .Body-Slide .Titulo h1:nth-child(2){
+
+.Contenedor_Slide .Body-Slide .Titulo h1:nth-child(2) {
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     text-transform: uppercase;
     font-weight: bold;
@@ -77,23 +64,21 @@
     color: red;
 }
 
-.Contenedor_Slide .Body-Slide .Info{
-
+.Contenedor_Slide .Body-Slide .Info {
     width: 100%;
-   
 }
 
-.Contenedor_Slide .Body-Slide .Cajas{
+.Contenedor_Slide .Body-Slide .Cajas {
     display: flex;
     justify-content: space-between;
 }
 
-.Contenedor_Slide .Body-Slide .Cajas .Caja_1{
+.Contenedor_Slide .Body-Slide .Cajas .Caja_1 {
     margin-top: 50px;
     width: 20%;
     height: 100px;
     backdrop-filter: blur(25px);
-    -border: 1px solid rgba(196, 186, 186, 0.2);
+    border: 1px solid rgba(196, 186, 186, 0.2);
     border-radius: 5px;
     box-shadow: 3px 6px 12px rgba(0, 0, 0, 0.2);
     display: flex;
@@ -101,60 +86,48 @@
     align-items: center;
 }
 
-.Menu-Abrir{
+.Menu-Abrir {
     display: none;
     z-index: 100;
     cursor: pointer;
 }
 
-
-
-@media screen and (max-width: 1035px){
-    .Contenedor_Slide .Body-Slide{
+@media screen and (max-width: 1035px) {
+    .Contenedor_Slide .Body-Slide {
         width: 45%;
     }
-    
 }
 
-@media screen and (max-width: 860px){
-    .Contenedor_Slide .Body-Slide{
-
-        position: absolute;
+@media screen and (max-width: 860px) {
+    .Contenedor_Slide .Body-Slide {
         top: 0;
         color: #fff;
         transform: translateX(150px);
         margin-top: 60px;
         width: 60%;
     }
-    
 }
 
-@media screen and (max-width: 655px){
-    
-    .Contenedor_Slide .Body-Slide .Titulo:nth-child(1){
+@media screen and (max-width: 655px) {
+    .Contenedor_Slide .Body-Slide .Titulo:nth-child(1) {
         font-size: 30px;
     }
-    .Contenedor_Slide .Body-Slide .Titulo h1:nth-child(2){
-       
+    .Contenedor_Slide .Body-Slide .Titulo h1:nth-child(2) {
         font-size: 40px;
-      
     }
-    .Contenedor_Slide .Body-Slide{
+    .Contenedor_Slide .Body-Slide {
         transform: translateX(120px);
     }
 }
 
-
-@media screen and (max-width: 1150px){
-    .Contenedor_Slide{
+@media screen and (max-width: 1150px) {
+    .Contenedor_Slide {
         height: 100vh;
-        
-        
     }
-    .Back-Image{
+    .Back-Image {
         height: 100%;
     }
-    .Menu-Abrir{
+    .Menu-Abrir {
         display: flex;
         position: absolute;
         right: 0;
@@ -163,4 +136,3 @@
         color: #fff;
     }
 }
-

@@ -4,6 +4,9 @@ import Analisis from "../Admin/Analisis";
 import ListaVehiculos from "../Admin/ListaVehiculos";
 import AdminEconomy from "../Admin/AdminEconomy";
 import AdminUsers from "../Admin/AdminUsers";
+import Login from "../Components/Login";
+import { Reservations } from "../Components/Sections/Reservations";  
+import { Checkout } from '../Components/Checkout';
 
 export function Ruta() {
   return (
@@ -14,6 +17,11 @@ export function Ruta() {
         <Route path="/admin/lista-vehiculos" element={<ListaVehiculos />} />
         <Route path="/admin/economia" element={<AdminEconomy />} />
         <Route path="/admin/usuarios" element={<AdminUsers />} />
+        <Route path="/login" element={<Login />} />
+
+        {/* Rutas para Reservations y Checkout */}
+        <Route path="/reservations" element={<Reservations />} />
+        <Route path="/checkout" element={<Checkout />} />
       </Routes>
     </BrowserRouter>
   );

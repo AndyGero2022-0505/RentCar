@@ -1,4 +1,3 @@
-
 import { Header } from '../Components/Header';
 import { Contacto } from '../Components/Sections/Contacto';
 import { Inventory } from '../Components/Sections/inventory';
@@ -12,30 +11,26 @@ import { createContext, useState } from 'react';
 export const MenuContext = createContext();
 
 function App() {
-  
-  const [AbrirMenu, setAbrirMenu] = useState(false);
-  const [ApagarMenu, setApagarMenu] = useState(false);
+  // Usar solo un estado para controlar la visibilidad del Header
+  const [isHeaderVisible, setIsHeaderVisible] = useState(true);
 
   return (
-   <MenuContext.Provider value={[AbrirMenu, setAbrirMenu, setApagarMenu]}>
-     <div className="App">
+    <MenuContext.Provider value={[isHeaderVisible, setIsHeaderVisible]}>
+      <div className="App">
         <div className="Header-App" id='Home'>
-          {
-            ApagarMenu != true ?
-            <Header/>
-            :
-            null
-          }
-          <Slide/>
+          {/* Condicional que renderiza Header dependiendo del estado */}
+          {isHeaderVisible && <Header />}
+          <Slide />
         </div>
+        
         <div className="Body-App">
-          <Inventory/>
-          <Reservations/>
-          <Services/>
-          <Contacto/>
+          <Inventory />
+          <Reservations />
+          <Services />
+          <Contacto />
         </div>
-    </div>
-   </MenuContext.Provider>
+      </div>
+    </MenuContext.Provider>
   );
 }
 
